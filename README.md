@@ -18,6 +18,18 @@ The script `dependency.sh` sets up the environment for pandoc builds.
 - Other dependencies:
   - librsvg2-bin for SVG processing
 
+### Dockerfile
+
+The `Dockerfile` is used to build the environment for pandoc builds.
+
+Usage:
+```bash
+docker run --rm -it \
+  -v $(pwd):/work \
+  ghcr.io/openxiangshan/docs-utils:latest \
+  make
+```
+
 ### Pandoc Template
 
 Customized pandoc templates for HTML and LaTeX.
@@ -47,7 +59,7 @@ All Pandoc [Lua filters](https://pandoc.org/lua-filters.html) are located in `pa
 
 ### MkDocs building environment requirements
 
-The script `requirements.sh` defines requirements for MkDocs building.
+The script `requirements.txt` defines requirements for MkDocs building.
 
 - [MkDocs-Material](https://squidfunk.github.io/mkdocs-material/)
 - Python-Markdown extensions:

@@ -1,11 +1,27 @@
+#!/bin/bash
+
+set -e
+
+if [ $(id -u) -eq 0 ]; then # for docker build, skip sudo if already root
+    SUDO=
+else
+    SUDO=sudo
+fi
+
 mkdir -p ~/.local/bin
 mkdir -p ~/.local/share/pandoc/filters
 mkdir -p ~/.local/share/fonts
 
-sudo apt-get install -y librsvg2-bin
+export PATH=$PATH:~/.local/bin
+
+$SUDO apt update
+$SUDO apt install -y \
+    wget xz-utils perl make git \
+    librsvg2-bin
 
 wget https://github.com/jgm/pandoc/releases/download/3.4/pandoc-3.4-1-amd64.deb
-sudo dpkg -i pandoc-3.4-1-amd64.deb
+$SUDO dpkg -i pandoc-3.4-1-amd64.deb
+rm pandoc-3.4-1-amd64.deb
 
 wget https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.18.0/pandoc-crossref-Linux.tar.xz
 tar -xf pandoc-crossref-Linux.tar.xz -C ~/.local/bin
