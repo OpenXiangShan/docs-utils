@@ -29,10 +29,13 @@ tar -xf pandoc-crossref-Linux.tar.xz -C ~/.local/bin
 wget -O ~/.local/share/pandoc/filters/include-files.lua https://github.com/pandoc-ext/include-files/raw/refs/heads/main/include-files.lua
 
 wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh
-tlmgr install ctex setspace subfig caption textpos
+tlmgr install ctex setspace subfig caption textpos tocloft
 # tlmgr install svg transparent ifplatform catchfile
 
 # Get Source Han Sans Fonts
 wget -O ~/.local/share/fonts/SourceHanSansCN-Regular.otf https://github.com/adobe-fonts/source-han-sans/raw/refs/heads/release/SubsetOTF/CN/SourceHanSansCN-Regular.otf
-wget -O ~/.local/share/fonts/SourceHanSansCN-Medium.otf https://github.com/adobe-fonts/source-han-sans/raw/refs/heads/release/SubsetOTF/CN/SourceHanSansCN-Medium.otf
 wget -O ~/.local/share/fonts/SourceHanSansCN-Bold.otf https://github.com/adobe-fonts/source-han-sans/raw/refs/heads/release/SubsetOTF/CN/SourceHanSansCN-Bold.otf
+
+# Get Source Han Serif Fonts
+wget -O ~/.local/share/fonts/SourceHanSerifCN-Regular.otf https://github.com/adobe-fonts/source-han-serif/raw/refs/heads/release/SubsetOTF/CN/SourceHanSerifCN-Regular.otf
+wget -O ~/.local/share/fonts/SourceHanSerifCN-Bold.otf https://github.com/adobe-fonts/source-han-serif/raw/refs/heads/release/SubsetOTF/CN/SourceHanSerifCN-Bold.otf

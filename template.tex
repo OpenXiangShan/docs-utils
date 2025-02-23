@@ -9,28 +9,23 @@ $if(CJKmainfont)$
 $endif$
 %
 \documentclass[
-$if(fontsize)$
-  $fontsize$,
-$endif$
-$if(papersize)$
-  $papersize$paper,
-$endif$
 $for(classoption)$
   $classoption$$sep$,
 $endfor$
+  zihao=5,
   a4paper,
   twoside,
   openany,
+  fontset = none,
 ]{ctexbook}
 
 \usepackage{amsmath,amssymb}
 \usepackage{setspace}
 \usepackage{iftex}
-\ifPDFTeX
-  \usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}
-  \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provide euro and other symbols
-\else % if luatex or xetex
+
+% XiangShan Doc Template only supports XeTeX.
+\RequireXeTeX
+
 \usepackage{fontspec}
 $if(mathspec)$
   \ifXeTeX
@@ -43,71 +38,26 @@ $else$
 $endif$
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
-\fi
-$if(fontfamily)$
-$else$
-\usepackage{lmodern}
-$endif$
-$if(fontfamily)$
-\usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
-$endif$
-\ifPDFTeX\else
-  % xetex/luatex font selection
+
+\setmainfont[Scale=MatchUppercase]{Source Han Serif CN}
+\setCJKmainfont[Scale=MatchUppercase]{Source Han Serif CN}
+
+\setsansfont[Scale=MatchUppercase]{Source Han Sans CN}
+\setCJKsansfont[Scale=MatchUppercase]{Source Han Sans CN}
+
 $if(mainfont)$
-  $if(mainfontfallback)$
-    \ifLuaTeX
-      \usepackage{luaotfload}
-      \directlua{luaotfload.add_fallback("mainfontfallback",{
-        $for(mainfontfallback)$"$mainfontfallback$"$sep$,$endfor$
-      })}
-    \fi
-  $endif$
   \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$$if(mainfontfallback)$,RawFeature={fallback=mainfontfallback}$endif$]{$mainfont$}
 $endif$
 $if(sansfont)$
-  $if(sansfontfallback)$
-    \ifLuaTeX
-      \usepackage{luaotfload}
-      \directlua{luaotfload.add_fallback("sansfontfallback",{
-        $for(sansfontfallback)$"$sansfontfallback$"$sep$,$endfor$
-      })}
-    \fi
-  $endif$
   \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$$if(sansfontfallback)$,RawFeature={fallback=sansfontfallback}$endif$]{$sansfont$}
 $endif$
 $if(monofont)$
-  $if(monofontfallback)$
-    \ifLuaTeX
-      \usepackage{luaotfload}
-      \directlua{luaotfload.add_fallback("monofontfallback",{
-        $for(monofontfallback)$"$monofontfallback$"$sep$,$endfor$
-      })}
-    \fi
-  $endif$
   \setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$if(monofontfallback)$,RawFeature={fallback=monofontfallback}$endif$]{$monofont$}
 $endif$
 $for(fontfamilies)$
   \newfontfamily{$fontfamilies.name$}[$for(fontfamilies.options)$$fontfamilies.options$$sep$,$endfor$]{$fontfamilies.font$}
 $endfor$
 
-\newfontfamily\SourceHanSansCN{Source Han Sans CN}
-\setCJKfamilyfont{SourceHanSansCN}{Source Han Sans CN}
-\newfontfamily\SourceHanSansCNMedium{Source Han Sans CN Medium}
-\setCJKfamilyfont{SourceHanSansCNMedium}{Source Han Sans CN Medium}
-\newfontfamily\SourceHanSansCNBold{Source Han Sans CN Bold}
-\setCJKfamilyfont{SourceHanSansCNBold}{Source Han Sans CN Bold}
-
-$if(mathfont)$
-$if(mathspec)$
-  \ifXeTeX
-    \setmathfont(Digits,Latin,Greek)[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
-  \else
-    \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
-  \fi
-$else$
-  \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
-$endif$
-$endif$
 $if(CJKmainfont)$
   \ifXeTeX
     \usepackage{xeCJK}
@@ -120,29 +70,52 @@ $if(CJKmainfont)$
     $endif$
   \fi
 $endif$
-$if(luatexjapresetoptions)$
-  \ifLuaTeX
-    \usepackage[$for(luatexjapresetoptions)$$luatexjapresetoptions$$sep$,$endfor$]{luatexja-preset}
+
+$if(mathfont)$
+$if(mathspec)$
+  \ifXeTeX
+    \setmathfont(Digits,Latin,Greek)[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
+  \else
+    \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
   \fi
+$else$
+  \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
 $endif$
-$if(CJKmainfont)$
-  \ifLuaTeX
-    \usepackage[$for(luatexjafontspecoptions)$$luatexjafontspecoptions$$sep$,$endfor$]{luatexja-fontspec}
-    \setmainjfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
-  \fi
 $endif$
-\fi
 
 \ctexset {
+  part = {
+    format = {\Huge \sffamily \bfseries \centering}
+  },
   chapter = {
     name = {},
     number = {\arabic{chapter}},
-    format = {\huge\bfseries}
+    format = {\huge \sffamily \bfseries},
   },
   section = {
-    format = {\Large\bfseries}
-  }
+    format = {\Large \sffamily \bfseries},
+  },
+  subsection = {
+    format = {\large \sffamily \bfseries},
+  },
+  subsubsection = {
+    format = {\normalsize \sffamily \bfseries},
+  },
+  paragraph = {
+    format = {\normalsize \sffamily \bfseries},
+    runin = false,
+  },
+  subparagraph = {
+    format = {\normalsize \sffamily \bfseries},
+    runin = false,
+    indent = 0pt,
+  },
 }
+
+\usepackage{tocloft}
+\renewcommand{\cfttoctitlefont}{\huge \sffamily \bfseries}
+\renewcommand{\cftpartfont}{\large \sffamily \bfseries}
+\renewcommand{\cftchapfont}{\sffamily \bfseries}
 
 $if(zero-width-non-joiner)$
 %% Support for zero-width non-joiner characters.
@@ -456,7 +429,8 @@ $endif$
   \noindent
   \parbox{\textwidth}
   {
-    \linespread{1.3}\fontsize{48}{48}\SourceHanSansCNBold\CJKfamily{SourceHanSansCNBold}
+    \fontsize{42pt}{42pt}\linespread{1.5}
+    \sffamily\bfseries
     $title-latex$
     $if(title-line1)$
       $title-line1$
@@ -471,21 +445,23 @@ $endif$
     $endif$
   }
 
-  \vspace{36pt}
+  \vspace{32pt}
 
   \noindent
   \parbox{\textwidth}
   {
-    \fontsize{26}{26}\SourceHanSansCN\CJKfamily{SourceHanSansCN}
+    \fontsize{22pt}{22pt}
+    \sffamily\mdseries
     $i18n-applicable$\ $replace_variables.processor_name$
   }
 
-  \vspace{72pt}
+  \vspace{32pt}
 
   \noindent
   \parbox{\textwidth}
   {
-    \fontsize{14}{14}\SourceHanSansCN\CJKfamily{SourceHanSansCN}
+    \fontsize{12pt}{12pt}
+    \sffamily\mdseries
     $version$\\
     \today
   }
