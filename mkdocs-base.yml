@@ -1,14 +1,18 @@
 site_name: 香山开源处理器文档模板
 copyright: |
-  <div>XiangShan Documents are licensed under CC BY 4.0.</div>
+  <div>XiangShan Documents are licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</div>
   <div>Copyright © 2024 - 2025 The XiangShan Team, Beijing Institute of Open Source Chip</div>
+
 
 theme:
   name: material
+  language: zh
   features:
     - navigation.indexes
     - navigation.top
     - navigation.footer
+    - content.action.edit
+    - content.action.view
 
 extra_css:
   - stylesheets/extra.css
@@ -33,4 +37,17 @@ markdown_extensions:
       yaml_file: variables.yml
 
 plugins:
+  - search:
+      lang: zh
 
+extra:
+  social:
+    - icon: fontawesome/solid/house
+      link: https://xiangshan.cc/
+      name: XiangShan Homepage
+    - icon: material/file-document-multiple
+      link: https://docs.xiangshan.cc
+      name: XiangShan Documents
+    - icon: fontawesome/brands/github
+      link: https://github.com/OpenXiangShan
+      name: XiangShan on Github

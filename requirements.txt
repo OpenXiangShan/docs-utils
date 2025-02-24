@@ -1,5 +1,6 @@
 mkdocs-material~=9.5.0
 markdown_grid_tables>=0.4.0
 markdown-captions~=2.1.0
+jieba~=0.42.0
 git+https://github.com/flywire/caption
 git+https://github.com/OpenXiangShan/docs-utils.git
