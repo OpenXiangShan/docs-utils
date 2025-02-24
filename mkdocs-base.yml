@@ -1,0 +1,36 @@
+site_name: 香山开源处理器文档模板
+copyright: |
+  <div>XiangShan Documents are licensed under CC BY 4.0.</div>
+  <div>Copyright © 2024 - 2025 The XiangShan Team, Beijing Institute of Open Source Chip</div>
+
+theme:
+  name: material
+  features:
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - footnotes
+  - abbr
+  - pymdownx.snippets
+  - attr_list
+  - md_in_html
+  - def_list
+  - markdown_grid_tables
+  - markdown_captions     # for image caption, use alt as caption
+  - table_captions:       # for table caption, use Table: xxxx
+      numbering: false
+  - remove_references
+  - remove_include
+  - replace_variables:
+      yaml_file: variables.yml
+
+plugins:
+
