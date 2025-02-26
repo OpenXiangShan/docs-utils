@@ -14,8 +14,13 @@ $for(classoption)$
 $endfor$
   zihao=5,
   a4paper,
+$if(twoside)$
   twoside,
+  openright,
+$else$
+  oneside,
   openany,
+$endif$
   fontset = none,
 ]{ctexbook}
 
@@ -479,7 +484,11 @@ $endif$
 
 $for(include-before)$
 $include-before$
-\clearpage
+$if(twoside)$
+  \cleardoublepage
+$else$
+  \clearpage
+$endif$
 $endfor$
 $if(toc)$
 $if(toc-title)$
@@ -491,16 +500,28 @@ $endif$
   $endif$
   \setcounter{tocdepth}{$toc-depth$}
   \tableofcontents
-  \clearpage
+  $if(twoside)$
+    \cleardoublepage
+  $else$
+    \clearpage
+  $endif$
 }
 $endif$
 $if(lof)$
-\listoffigures
-\clearpage
+  \listoffigures
+  $if(twoside)$
+    \cleardoublepage
+  $else$
+    \clearpage
+  $endif$
 $endif$
 $if(lot)$
-\listoftables
-\clearpage
+  \listoftables
+  $if(twoside)$
+    \cleardoublepage
+  $else$
+    \clearpage
+  $endif$
 $endif$
 $if(linestretch)$
 \setstretch{$linestretch$}
