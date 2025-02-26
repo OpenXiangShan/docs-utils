@@ -29,8 +29,7 @@ markdown_extensions:
   - def_list
   - markdown_grid_tables
   - markdown_captions     # for image caption, use alt as caption
-  - table_captions:       # for table caption, use Table: xxxx
-      numbering: false
+  - table_captions       # for table caption, use Table: xxxx
   - remove_references
   - remove_include
   - replace_variables:
