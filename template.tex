@@ -232,6 +232,12 @@ $if(numbersections)$
 $else$
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 $endif$
+
+$if(break-after-section)$
+\usepackage{titlesec}
+\newcommand{\sectionbreak}{\clearpage}
+$endif$
+
 $if(subfigure)$
 \usepackage{subcaption}
 $endif$
