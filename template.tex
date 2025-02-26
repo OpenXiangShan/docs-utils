@@ -116,6 +116,8 @@ $endif$
 \renewcommand{\cfttoctitlefont}{\huge \sffamily \bfseries}
 \renewcommand{\cftpartfont}{\large \sffamily \bfseries}
 \renewcommand{\cftchapfont}{\sffamily \bfseries}
+\renewcommand{\cftloftitlefont}{\huge \sffamily \bfseries}
+\renewcommand{\cftlottitlefont}{\huge \sffamily \bfseries}
 
 $if(zero-width-non-joiner)$
 %% Support for zero-width non-joiner characters.
@@ -489,13 +491,16 @@ $endif$
   $endif$
   \setcounter{tocdepth}{$toc-depth$}
   \tableofcontents
+  \clearpage
 }
 $endif$
 $if(lof)$
 \listoffigures
+\clearpage
 $endif$
 $if(lot)$
 \listoftables
+\clearpage
 $endif$
 $if(linestretch)$
 \setstretch{$linestretch$}
