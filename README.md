@@ -12,8 +12,9 @@ The script `dependency.sh` sets up the environment for pandoc builds.
   - [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref) with corresponding version
   - [include-files](https://github.com/pandoc-ext/include-files)
 - [TinyTeX](https://yihui.org/tinytex/) and some LaTeX Package:
-  - ctex, setspace, subfig, caption, textpos
+  - ctex, setspace, subfig, caption, textpos, tocloft, titlesec
 - Fonts:
+  - [Source Han Serif](https://github.com/adobe-fonts/source-han-serif/)
   - [Source Han Sans](https://github.com/adobe-fonts/source-han-sans/)
 - Other dependencies:
   - librsvg2-bin for SVG processing
@@ -57,6 +58,16 @@ All Pandoc [Lua filters](https://pandoc.org/lua-filters.html) are located in `pa
   
   Change referenced SVG format images to their corresponding PDF format images, which is useful for LaTeX builds.
 
+### MkDocs general config
+
+The yaml file `mkdocs-base.yml` defines the general configurations of MkDocs, and is recommended to be `INHERIT` by `mkdocs.yml`.
+
+```
+INHERIT: utils/mkdocs-base.yml
+site_name: Your Site Name
+# ...
+```
+
 ### MkDocs building environment requirements
 
 The script `requirements.txt` defines requirements for MkDocs building.
@@ -65,7 +76,6 @@ The script `requirements.txt` defines requirements for MkDocs building.
 - Python-Markdown extensions:
   - [markdown_grid_tables](https://gitlab.com/WillDaSilva/markdown_grid_tables)
   - [markdown_captions](https://github.com/evidlo/markdown_captions)
-  - [caption](https://github.com/flywire/caption)
   - The following Python-Markdown extensions
 
 ### Python-Markdown extensions
@@ -83,21 +93,38 @@ All Python-Markdown [extensions](https://python-markdown.github.io/extensions/) 
 
 - `remove_references.py`: 
 
-  Remove Pandoc [crossref](https://github.com/lierdakil/pandoc-crossref) with corresponding version style reference label like `[@sec:foobar]`
+  Remove [Pandoc-crossref](https://github.com/lierdakil/pandoc-crossref)-style reference label like `[@sec:foobar]`
 
 
 - `replace_variables.py`: 
   
-  Replace placeholders (e.g. `{{foo}}`) in Markdown with their corresponding value (e.g. `bar`) defined in extension config.
+  Replace placeholders (e.g. `{{foo}}`) in Markdown with their corresponding value (e.g. `bar`) defined in extension config or a yaml file.
 
   Example of `mkdocs.yml`:
 
   ```yaml
   markdown_extensions:
     - xiangshan_docs_utils.replace_variables:
+        yaml_file: variables.yml
         variables:
           foo: "bar"
   ```
+
+- `table_captions.py`:
+
+  Support pandoc-style [table captions](https://pandoc.org/MANUAL.html#extension-table_captions) with attribute lists.
+
+  ```
+  Table: This is a Table {#tbl:example-table}
+
+  | Col1 | Col2 |
+  |------|------|
+  |  11  |  22  |
+  ```
+
+### MkDocs extra stylesheets
+
+`stylesheets/mkdocs_extra.css` fixes the display of table caption. See [squidfunk/mkdocs-material#7889](https://github.com/squidfunk/mkdocs-material/issues/7889).
 
 ### Resources
 
