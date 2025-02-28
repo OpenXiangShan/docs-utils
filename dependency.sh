@@ -29,7 +29,7 @@ tar -xf pandoc-crossref-Linux.tar.xz -C ~/.local/bin
 wget -O ~/.local/share/pandoc/filters/include-files.lua https://github.com/pandoc-ext/include-files/raw/refs/heads/main/include-files.lua
 
 wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh
-tlmgr install ctex setspace subfig caption textpos tocloft titlesec
+tlmgr install ctex setspace subfig caption textpos tocloft titlesec multirow
 # tlmgr install svg transparent ifplatform catchfile
 
 # Get Source Han Sans Fonts
