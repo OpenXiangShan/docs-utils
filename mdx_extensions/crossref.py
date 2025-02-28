@@ -5,6 +5,8 @@ import re
 import xml.etree.ElementTree as etree
 from typing import Any
 
+NOLINK = r'(?!\()'
+
 class CrossRefInlineProcessor(InlineProcessor):
     RE_ONEREF = re.compile(r'^(?P<prefix>[^@]*)@(?P<type>[\w]+):(?P<tag>[\w-]+)$')
 
@@ -195,8 +197,8 @@ class CrossRefExtension(Extension):
 
 
     def extendMarkdown(self, md):
-        CROSSREF_RE = NOIMG + r'\[([^\]]*)\]'
-        md.inlinePatterns.register(CrossRefInlineProcessor(CROSSREF_RE, md, self.getConfigs()), 'crossref', 124)
+        CROSSREF_RE = NOIMG + r'\[([^\]]*)\]' + NOLINK
+        md.inlinePatterns.register(CrossRefInlineProcessor(CROSSREF_RE, md, self.getConfigs()), 'crossref', 175)
 
 
 def makeExtension(**kwargs):

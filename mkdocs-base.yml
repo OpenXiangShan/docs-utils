@@ -39,7 +39,6 @@ markdown_extensions:
       groupDelim: "、"
       remove_ref_types:
         - 'sec'
-  - remove_references
   - remove_include
   - replace_variables:
       yaml_file: variables.yml

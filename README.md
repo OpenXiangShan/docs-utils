@@ -124,11 +124,11 @@ All Python-Markdown [extensions](https://python-markdown.github.io/extensions/) 
 
 - `crossref.py`:
   
-  Supports [pandoc-crossref](https://lierdakil.github.io/pandoc-crossref/) style cross-reference syntax, e.g., [@fig:figure1].
+  Supports [pandoc-crossref](https://lierdakil.github.io/pandoc-crossref/) style cross-reference syntax, e.g., `[@fig:figure1]`.
 
   Features:
 
-  - [x] Generate in-page links for [@fig:figure1], etc.
+  - [x] Generate in-page links for `[@fig:figure1]`, etc.
   - [x] Remove certain types of cross-references
   - [ ] Support numbering of figures and tables
   - [ ] Interact with figure/table caption extensions
