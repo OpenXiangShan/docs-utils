@@ -122,6 +122,18 @@ All Python-Markdown [extensions](https://python-markdown.github.io/extensions/) 
   |  11  |  22  |
   ```
 
+- `crossref.py`:
+  
+  Supports [pandoc-crossref](https://lierdakil.github.io/pandoc-crossref/) style cross-reference syntax, e.g., [@fig:figure1].
+
+  Features:
+
+  - [x] Generate in-page links for [@fig:figure1], etc.
+  - [x] Remove certain types of cross-references
+  - [ ] Support numbering of figures and tables
+  - [ ] Interact with figure/table caption extensions
+  - [ ] Cross-page references
+
 ### MkDocs extra stylesheets
 
 `stylesheets/mkdocs_extra.css` fixes the display of table caption. See [squidfunk/mkdocs-material#7889](https://github.com/squidfunk/mkdocs-material/issues/7889).
