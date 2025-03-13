@@ -235,7 +235,10 @@ $endif$
 
 $if(break-after-section)$
 \usepackage{titlesec}
-\newcommand{\sectionbreak}{\clearpage}
+\usepackage{placeins}
+% \newcommand{\sectionbreak}{\clearpage}
+\newcommand{\sectionbreak}{\FloatBarrier}
+\newcommand{\subsectionbreak}{\FloatBarrier}
 $endif$
 
 $if(subfigure)$
