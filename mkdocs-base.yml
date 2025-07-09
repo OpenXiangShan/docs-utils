@@ -7,6 +7,7 @@ copyright: |
 theme:
   name: material
   language: zh
+  custom_dir: utils/custom_theme
   features:
     - navigation.indexes
     - navigation.top
@@ -15,10 +16,10 @@ theme:
     - content.action.view
 
 extra_css:
-  - stylesheets/extra.css
+  - assets/stylesheets/table_fix.css
 
 extra_javascript:
-  - javascripts/mathjax.js
+  - assets/javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
 markdown_extensions:

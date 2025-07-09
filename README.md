@@ -78,6 +78,21 @@ The script `requirements.txt` defines requirements for MkDocs building.
   - [markdown_captions](https://github.com/evidlo/markdown_captions)
   - The following Python-Markdown extensions
 
+### Mkdocs-Material Customization
+
+All customizations to the Mkdocs-Material theme are located in the `custom_theme` directory. Add the following config into `mkdocs.yml` to use it:
+
+```yml
+theme:
+  custom_dir: utils/custom_theme
+```
+
+- Additional CSS `assets/stylesheets`
+  - `table_fix.css`: fixes the display of table caption. See [squidfunk/mkdocs-material#7889](https://github.com/squidfunk/mkdocs-material/issues/7889).
+
+- Additional JavaScript `assets/javascripts`
+  - `mathjax.js`: Enables MathJax support.
+
 ### Python-Markdown extensions
 
 All Python-Markdown [extensions](https://python-markdown.github.io/extensions/) are located in `mdx_extensions` folder and used in MkDocs builds.
@@ -133,10 +148,6 @@ All Python-Markdown [extensions](https://python-markdown.github.io/extensions/) 
   - [ ] Support numbering of figures and tables
   - [ ] Interact with figure/table caption extensions
   - [ ] Cross-page references
-
-### MkDocs extra stylesheets
-
-`stylesheets/mkdocs_extra.css` fixes the display of table caption. See [squidfunk/mkdocs-material#7889](https://github.com/squidfunk/mkdocs-material/issues/7889).
 
 ### Resources
 
