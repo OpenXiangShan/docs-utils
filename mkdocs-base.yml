@@ -23,32 +23,32 @@ extra_javascript:
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
 markdown_extensions:
-  - admonition
-  - pymdownx.details
-  - pymdownx.superfences
-  - pymdownx.arithmatex:
-      generic: true
-  - footnotes
-  - abbr
-  - pymdownx.snippets
-  - attr_list
-  - md_in_html
-  - def_list
-  - markdown_grid_tables
-  - markdown_captions     # for image caption, use alt as caption
-  - table_captions       # for table caption, use Table: xxxx
-  - crossref:
-      enable_ref_group: False
-      enable_ref_number: False
-      figPrefix: "此图"
-      tblPrefix: "此表"
-      refDelim: "、"
-      groupDelim: "、"
-      remove_ref_types:
-        - 'sec'
-  - remove_include
-  - replace_variables:
-      yaml_file: variables.yml
+  admonition: {}
+  pymdownx.details: {}
+  pymdownx.superfences: {}
+  pymdownx.arithmatex:
+    generic: true
+  footnotes: {}
+  abbr: {}
+  pymdownx.snippets: {}
+  attr_list: {}
+  md_in_html: {}
+  def_list: {}
+  markdown_grid_tables: {}
+  markdown_captions: {}     # for image caption, use alt as caption
+  table_captions: {}       # for table caption, use Table: xxxx
+  crossref:
+    enable_ref_group: False
+    enable_ref_number: False
+    figPrefix: "此图"
+    tblPrefix: "此表"
+    refDelim: "、"
+    groupDelim: "、"
+    remove_ref_types:
+      - 'sec'
+  remove_include: {}
+  replace_variables:
+      yaml_file: docs/variables.yml
 
 plugins:
   - search:
