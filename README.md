@@ -87,11 +87,24 @@ theme:
   custom_dir: utils/custom_theme
 ```
 
-- Additional CSS `assets/stylesheets`
+- Additional CSS `assets/stylesheets/`
   - `table_fix.css`: fixes the display of table caption. See [squidfunk/mkdocs-material#7889](https://github.com/squidfunk/mkdocs-material/issues/7889).
 
-- Additional JavaScript `assets/javascripts`
+- Additional JavaScript `assets/javascripts/`
   - `mathjax.js`: Enables MathJax support.
+  - `readthedocs.js`: Enable ReadTheDocs Version Addon, see details below.
+
+- Overide Partials `partials/`
+  - `alternate.html`: Enables [stay-on-page](https://squidfunk.github.io/mkdocs-material/setup/changing-the-language/#stay-on-page-insiders) feature for language selector.
+
+- ReadTheDocs Version Addon: integrate the Read the Docs version menu into the site navigation
+  - Using block override `main.html` to add additional meta and javascript.
+  - Add the following config to mkdocs.yml:
+
+    ```yml
+    extra:
+      readthedocs_version: true
+    ```
 
 ### Python-Markdown extensions
 
