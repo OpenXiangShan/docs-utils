@@ -97,9 +97,19 @@ theme:
 - Overide Partials `partials/`
   - `alternate.html`: Enables [stay-on-page](https://squidfunk.github.io/mkdocs-material/setup/changing-the-language/#stay-on-page-insiders) feature for language selector.
 
+  - `header.html`: Add a back-to-home button. 
+
+    ```yml
+    extra:
+      back_to_home:
+        url: https://docs.xiangshan.cc/
+        # icon: material/home    # Optional
+        # title: Back to home    # Optional
+    ```
+
 - ReadTheDocs Version Addon: integrate the Read the Docs version menu into the site navigation
   - Using block override `main.html` to add additional meta and javascript.
-  - Add the following config to mkdocs.yml:
+  - Add the following config to `mkdocs.yml`:
 
     ```yml
     extra:
