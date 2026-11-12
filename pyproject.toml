@@ -1,6 +1,6 @@
 [project]
-name = "xiangshan_docs_utils"
-description = "A collection of Python-Markdown extensions for XiangShan document builds."
+name = "xiangshan-docs-utils"
+description = "Python-Markdown extensions for XiangShan documentation."
 readme = "README.md"
 version = "0.1.0"
 authors = [
@@ -9,7 +9,8 @@ authors = [
 license = {file = "LICENSE"}
 requires-python = ">=3.7"
 dependencies = [
-    "markdown>=3.0"
+    "markdown>=3.0",
+    "PyYAML>=6.0",
 ]
 
 [build-system]

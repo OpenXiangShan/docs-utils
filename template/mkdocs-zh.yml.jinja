@@ -1,19 +1,27 @@
-site_name: 香山开源处理器文档模板
+site_name: '[[ site_name_zh ]]'
+
+repo_url: https://github.com/[[ github_owner ]]/[[ repository_name ]]
+
+repo_name: '[[ repository_name ]]'
+
+docs_dir: docs/zh
+
+site_dir: site/zh
+
 copyright: |
   <div>XiangShan Documents are licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</div>
-  <div>Copyright © 2024 - 2025 The XiangShan Team, Beijing Institute of Open Source Chip</div>
-
+  <div>Copyright © 2024 - 2026 The XiangShan Team, Beijing Institute of Open Source Chip</div>
 
 theme:
   name: material
-  language: zh
-  custom_dir: utils/custom_theme
+  custom_dir: tools/mkdocs_theme
   features:
     - navigation.indexes
     - navigation.top
     - navigation.footer
     - content.action.edit
     - content.action.view
+  language: zh
 
 extra_css:
   - assets/stylesheets/table_fix.css
@@ -35,24 +43,25 @@ markdown_extensions:
   md_in_html: {}
   def_list: {}
   markdown_grid_tables: {}
-  markdown_captions: {}     # for image caption, use alt as caption
-  table_captions: {}       # for table caption, use Table: xxxx
+  markdown_captions: {}
+  table_captions: {}
   crossref:
-    enable_ref_group: False
-    enable_ref_number: False
-    figPrefix: "此图"
-    tblPrefix: "此表"
-    refDelim: "、"
-    groupDelim: "、"
+    enable_ref_group: false
+    enable_ref_number: false
     remove_ref_types:
-      - 'sec'
+      - sec
+    figPrefix: 此图
+    tblPrefix: 此表
+    secPrefix: 此节
+    refDelim: 、
+    groupDelim: 、
   remove_include: {}
   replace_variables:
-      yaml_file: docs/variables.yml
+    yaml_file: docs/variables-zh.yml
 
 plugins:
-  - search:
-      lang: zh
+  search:
+    lang: zh
 
 extra:
   social:
@@ -64,4 +73,20 @@ extra:
       name: XiangShan Documents
     - icon: fontawesome/brands/github
       link: https://github.com/OpenXiangShan
-      name: XiangShan on Github
+      name: XiangShan on GitHub
+  readthedocs_version: true
+  back_to_home:
+    url: https://docs.xiangshan.cc/
+    icon: material/file-document-multiple
+    title: 回到香山文档首页
+  alternate:
+    - name: 中文
+      link: https://docs.xiangshan.cc/projects/[[ docs_project_slug ]]/zh-cn/latest/
+      lang: zh
+    - name: English
+      link: https://docs.xiangshan.cc/projects/[[ docs_project_slug ]]/en/latest/
+      lang: en
+
+nav:
+  - 首页: index.md
+  - 开始使用: getting-started.md

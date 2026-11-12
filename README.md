@@ -1,16 +1,39 @@
 # Utility for XiangShan Document
 
+English | [简体中文](README.zh.md)
+
 This repository contains the utilities and resources needed to build XiangShan's standardized Document.
 
-## Contents
+XiangShan's standardized documentation uses [Copier](https://copier.readthedocs.io/) to manage documentation repository structure and resources, [MkDocs](https://www.mkdocs.org/) and [MkDocs-Material](https://squidfunk.github.io/mkdocs-material/) to build documentation websites, and [Pandoc](https://pandoc.org/) and LaTeX to build PDFs.
 
-### Pandoc building environment dependency script
+## Documentation repository Copier template
 
-The script `dependency.sh` sets up the environment for pandoc builds.
+[Copier](https://copier.readthedocs.io/) manages documentation repository templates and keeps downstream repositories in sync with template changes. The Copier template is located in the `template` directory.
+
+Create a documentation repository from the template with:
+
+```bash
+copier copy --vcs-ref=master \
+  https://github.com/OpenXiangShan/docs-utils.git \
+  my-documentation
+```
+
+From a clean working tree in the downstream repository, update the template with:
+
+```bash
+copier update --vcs-ref=master
+```
+
+The template includes a GitHub Actions workflow that checks for template changes each week and opens or updates a draft PR when there are changes.
+
+## Pandoc and LaTeX toolchain
+
+### Dependency installation script
+
+The script `dependency.sh` sets up the environment for Pandoc and LaTeX builds.
 
 - [Pandoc](https://pandoc.org/) and its filters:
   - [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref) with corresponding version
-  - [include-files](https://github.com/pandoc-ext/include-files)
 - [TinyTeX](https://yihui.org/tinytex/) and some LaTeX Package:
   - ctex, setspace, subfig, caption, textpos, tocloft, titlesec
 - Fonts:
@@ -23,7 +46,8 @@ The script `dependency.sh` sets up the environment for pandoc builds.
 
 The `Dockerfile` is used to build the environment for pandoc builds.
 
-Usage:
+Run this command from the root of the downstream documentation repository:
+
 ```bash
 docker run --rm -it \
   -v $(pwd):/work \
@@ -33,11 +57,15 @@ docker run --rm -it \
 
 ### Pandoc Template
 
-Customized pandoc templates for HTML and LaTeX.
+The customized LaTeX template is located in `template/tools/pandoc/template.tex`.
 
 ### Pandoc Lua filters
 
 All Pandoc [Lua filters](https://pandoc.org/lua-filters.html) are located in `pandoc_filters`.
+
+- `include-files.lua`:
+
+  [pandoc-ext/include-files](https://github.com/pandoc-ext/include-files), licensed under MIT.
 
 - `remove_md_links.lua`:
   
@@ -58,19 +86,17 @@ All Pandoc [Lua filters](https://pandoc.org/lua-filters.html) are located in `pa
   
   Change referenced SVG format images to their corresponding PDF format images, which is useful for LaTeX builds.
 
+## MkDocs toolchain
+
 ### MkDocs general config
 
-The yaml file `mkdocs-base.yml` defines the general configurations of MkDocs, and is recommended to be `INHERIT` by `mkdocs.yml`.
+The templates `template/mkdocs-en.yml.jinja` and `template/mkdocs-zh.yml.jinja` generate complete MkDocs configurations. `mkdocs.yml` selects the language using `MKDOCS_YML_FILE`, defaulting to Chinese.
 
-```
-INHERIT: utils/mkdocs-base.yml
-site_name: Your Site Name
-# ...
-```
+Maintain `nav` in each generated language file.
 
 ### MkDocs building environment requirements
 
-The script `requirements.txt` defines requirements for MkDocs building.
+The file `template/requirements.txt` defines requirements for MkDocs building, and is copied to `requirements.txt` in each document repository.
 
 - [MkDocs-Material](https://squidfunk.github.io/mkdocs-material/)
 - Python-Markdown extensions:
@@ -80,11 +106,11 @@ The script `requirements.txt` defines requirements for MkDocs building.
 
 ### Mkdocs-Material Customization
 
-All customizations to the Mkdocs-Material theme are located in the `custom_theme` directory. Add the following config into `mkdocs.yml` to use it:
+All customizations to the MkDocs-Material theme are located in the `template/tools/mkdocs_theme` directory. Add the following to `mkdocs.yml` to enable them:
 
 ```yml
 theme:
-  custom_dir: utils/custom_theme
+  custom_dir: tools/mkdocs_theme
 ```
 
 - Additional CSS `assets/stylesheets/`
@@ -94,7 +120,7 @@ theme:
   - `mathjax.js`: Enables MathJax support.
   - `readthedocs.js`: Enable ReadTheDocs Version Addon, see details below.
 
-- Overide Partials `partials/`
+- Override Partials `partials/`
   - `alternate.html`: Enables [stay-on-page](https://squidfunk.github.io/mkdocs-material/setup/changing-the-language/#stay-on-page-insiders) feature for language selector.
 
   - `header.html`: Add a back-to-home button. 
@@ -118,7 +144,11 @@ theme:
 
 ### Python-Markdown extensions
 
-All Python-Markdown [extensions](https://python-markdown.github.io/extensions/) are located in `mdx_extensions` folder and used in MkDocs builds.
+All Python-Markdown [extensions](https://python-markdown.github.io/extensions/) are located in the `mdx_extensions` directory and used in MkDocs builds. Install them with:
+
+```bash
+pip install git+https://github.com/OpenXiangShan/docs-utils.git
+```
 
 - `remove_include.py`:
 
@@ -142,7 +172,7 @@ All Python-Markdown [extensions](https://python-markdown.github.io/extensions/) 
 
   ```yaml
   markdown_extensions:
-    - xiangshan_docs_utils.replace_variables:
+    - replace_variables:
         yaml_file: variables.yml
         variables:
           foo: "bar"
@@ -172,11 +202,11 @@ All Python-Markdown [extensions](https://python-markdown.github.io/extensions/) 
   - [ ] Interact with figure/table caption extensions
   - [ ] Cross-page references
 
-### Resources
+## Other resources
 
-- SVG and PDF format Logos of BOSC and XiangShan Community.
+- `figs/`: BOSC and XiangShan Community logos in SVG and PDF formats.
   
-  These logos are all right reserved, and may not be used without permission.
+  All rights to these logos are reserved; they may not be used without permission.
 
 ## LICENSE
 
