@@ -1,0 +1,55 @@
+name: build document with pandoc
+
+on:
+  push:
+    branches: [ [[ default_branch ]] ]
+  pull_request:
+    branches: [ [[ default_branch ]] ]
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      ref:
+        description: Git ref to build
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/openxiangshan/docs-utils:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    strategy:
+      matrix:
+        lang: [zh, en]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref }}
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Build PDFs
+        env:
+          HOME: /root
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          make pdf-one LANG=${{ matrix.lang }}
+          make pdf-one LANG=${{ matrix.lang }} TWOSIDE=1
+
+      - name: Upload built PDFs
+        uses: actions/upload-artifact@v7
+        with:
+          name: [[ document_slug ]]-${{ matrix.lang }}
+          path: |
+            [[ document_slug ]]-${{ matrix.lang }}.pdf
+            [[ document_slug ]]-twoside-${{ matrix.lang }}.pdf
+          if-no-files-found: error

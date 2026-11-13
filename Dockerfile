@@ -1,6 +1,6 @@
 FROM ubuntu:noble
 
-COPY . /app
+COPY dependency.sh /app/dependency.sh
 RUN /app/dependency.sh && \
     apt clean && \
     git config --global --add safe.directory /work

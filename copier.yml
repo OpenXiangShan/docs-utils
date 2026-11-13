@@ -1,0 +1,83 @@
+_min_copier_version: "9.17.2"
+_subdirectory: template
+_preserve_symlinks: false
+_templates_suffix: .jinja
+_answers_file: .copier-answers.yml
+_keep_trailing_newline: true
+_envops:
+  block_start_string: "[%"
+  block_end_string: "%]"
+  variable_start_string: "[["
+  variable_end_string: "]]"
+  comment_start_string: "[#"
+  comment_end_string: "#]"
+_exclude:
+  - "[% if not include_starter_docs %]docs/**[% else %]__copier_include_all__[% endif %]"
+_skip_if_exists:
+  - docs/**
+
+github_owner:
+  type: str
+  help: GitHub organization or user that owns the document repository
+  default: OpenXiangShan
+
+repository_name:
+  type: str
+  help: GitHub repository name
+  default: XiangShan-Documentation
+  validator: >-
+    [% if not (repository_name | regex_search('^[A-Za-z0-9][A-Za-z0-9._-]*$')) %]
+    Use a valid GitHub repository name.
+    [% endif %]
+
+document_slug:
+  type: str
+  help: Lower-case name used for PDF, HTML, and artifact files
+  default: "[[ repository_name | lower ]]"
+  validator: >-
+    [% if not (document_slug | regex_search('^[a-z0-9][a-z0-9-]*$')) %]
+    Use lower-case letters, digits, and hyphens only.
+    [% endif %]
+
+site_name_en:
+  type: str
+  help: English document title
+  default: XiangShan Documentation
+
+site_name_zh:
+  type: str
+  help: Chinese document title
+  default: 香山文档
+
+description_en:
+  type: str
+  help: One-line English description
+  default: Documentation for XiangShan
+
+description_zh:
+  type: str
+  help: One-line Chinese description
+  default: 香山开源处理器文档
+
+docs_project_slug:
+  type: str
+  help: Project segment used below https://docs.xiangshan.cc/projects/
+  default: "[[ document_slug ]]"
+
+default_branch:
+  type: str
+  help: Default branch of the generated repository
+  default: master
+
+include_starter_docs:
+  type: bool
+  help: Generate starter files below docs/ for a new repository
+  default: true
+
+pdf_top_level_division:
+  type: str
+  help: Pandoc top-level division for the PDF
+  choices:
+    Chapter: chapter
+    Part: part
+  default: chapter
